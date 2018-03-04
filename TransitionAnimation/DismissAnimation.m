@@ -16,10 +16,14 @@
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     CGRect initialFrame = [transitionContext initialFrameForViewController:fromVC];
     CGRect screenBounds = [UIScreen mainScreen].bounds;
-    CGRect finalFrame = CGRectOffset(initialFrame, 0, screenBounds.size.height-200);
+    CGRect finalFrame = CGRectOffset(initialFrame, 0, screenBounds.size.height);
+    
+    UIView *containerView = [transitionContext containerView];
+    [containerView insertSubview:toVC.view atIndex:0];
     
     [UIView animateWithDuration:1.0 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.6 options:UIViewAnimationOptionCurveLinear animations:^{
         fromVC.view.frame = finalFrame;

@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor orangeColor];
+    _transitionDelegater = [TransitionDelegater new];
 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
@@ -29,7 +30,6 @@
 
 - (void)buttonClicked:(UIButton *)sender {
     ModalViewController *mvc = [ModalViewController new];
-    _transitionDelegater = [TransitionDelegater new];
     mvc.transitioningDelegate = _transitionDelegater;
     [self presentViewController:mvc animated:YES completion:nil];
 }

@@ -17,7 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor redColor];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
