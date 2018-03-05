@@ -12,4 +12,6 @@
 @interface DismissInteraction : UIPercentDrivenInteractiveTransition // NSObject <UIViewControllerInteractiveTransitioning>
 // 父类遵循了协议，所有子类也同时遵循。
 
+- (instancetype)initWithDismissedVC:(UIViewController *)dismissedVC;
+
 @end

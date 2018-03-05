@@ -11,11 +11,22 @@
 #import "DismissAnimation.h"
 #import "DismissInteraction.h"
 
+@interface TransitionDelegater ()
+@property (nonatomic, strong) UIViewController *presentedVC;
+@property (nonatomic, strong) DismissInteraction *dismissInteraction;
+@end
+
 @implementation TransitionDelegater
+
+- (void)setPresentedVC:(UIViewController *)presentedVC {
+    _presentedVC = presentedVC;
+    _dismissInteraction = [[DismissInteraction alloc] initWithDismissedVC:presentedVC];
+}
 
 // Present时的动画
 // 赋值给ModalViewController的transitionDelegate
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    self.presentedVC = presented;
     return [BouncePresentAnimation new];
 }
 
@@ -29,11 +40,11 @@
     return nil;
 }
 
-// Dismiss时的交互
+// Dismiss时的交互，由手势交互引起的dismiss
 - (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
-    return nil;
-//    return [DismissInteraction new];
+    return _dismissInteraction;
 }
+
 
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
     return nil;
